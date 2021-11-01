@@ -1,15 +1,16 @@
 import Models.Provider as Provider
+
 from flask_sqlalchemy import SQLAlchemy
 
 
 # Admin - Post
-def Insert_Post(content,dateCreate):
-    query = "INSERT INTO Posts ('content','dateCreate') VALUES ('{}','{}')".format(content,dateCreate)
+def Insert_Post(content,dateCreate,idUser):
+    query = "INSERT INTO Posts ('content','dateCreate','idUser') VALUES ('{}','{}','{}')".format(content,dateCreate,idUser)
     msg = Provider.ExecuteNonQuery(query)
     return msg
 
-def Update_Post(idPost,content,dateCreate):
-    query = "UPDATE Posts SET content='{}', dateCreate='{}' WHERE idPost={}".format(content,dateCreate,idPost)
+def Update_Post(idPost,content):
+    query = "UPDATE Posts SET content='{}' WHERE idPost={}".format(content,idPost)
     msg = Provider.ExecuteNonQuery(query)
     return msg
 
@@ -19,6 +20,17 @@ def Delete_Post(idPost):
     return msg
 
 
+def GetPost():
+    query = "SELECT * FROM Posts"
+
+    try : 
+        record = Provider.ExecuteQuery(query)
+        return record
+
+    except:
+        return None
+
+    
 # Test 
 # Insert_Post('Good','2010-10-10')
 # Update_Post(1,'Yeh','01-09-2002')

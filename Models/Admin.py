@@ -1,24 +1,24 @@
 import Models.Provider as Provider
 from flask_sqlalchemy import SQLAlchemy
 
-def Insert_Admin(dateOfBirth,address,userName,password,fullName,email,gender):
-    query = "INSERT INTO Users ('dateOfBirth','address','userName','password','fullName','email',gender) VALUES ('{}','{}','{}','{}','{}','{}','{}')".format(dateOfBirth,address,userName,password,fullName,email,gender)
+def Insert_Admin(dateOfBirth,address,userName,password,fullName,email,gender,phoneNumber):
+    query = "INSERT INTO Admin ('dateOfBirth','address','userName','password','fullName','email',gender,phoneNumber) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}')".format(dateOfBirth,address,userName,password,fullName,email,gender,phoneNumber)
     msg = Provider.ExecuteNonQuery(query)
     return msg
 
-def Update_Admin(idAdmin,dateOfBirth,address,userName,password,fullName,email,gender):
-    query = "UPDATE Users SET dateOfBirth='{}', address='{}', userName='{}', password='{}',fullName='{}',email='{}',gender={} WHERE idUser={}".format(idAdmin,dateOfBirth,address,userName,password,fullName,email,gender)
+def Update_Admin(idAdmin,dateOfBirth,address,userName,password,fullName,email,gender,phoneNumber):
+    query = "UPDATE Admin SET dateOfBirth='{}', address='{}', userName='{}', password='{}',fullName='{}',email='{}',gender={}, phoneNumber ='{}' WHERE idUser={}".format(idAdmin,dateOfBirth,address,userName,password,fullName,email,gender,phoneNumber)
     msg = Provider.ExecuteNonQuery(query)
     return msg
 
 def Delete_Admin(idAdmin):
-    query = "DELETE FROM Users WHERE idUser={}".format(idAdmin)
+    query = "DELETE FROM Admin WHERE idUser={}".format(idAdmin)
     msg = Provider.ExecuteNonQuery(query)
     return msg
 
-# Insert_Admin('01-08-2000','dsa','dsa','dsa','dsa','dssa',1)
+Insert_Admin('01-08-2000','dsa','dsa','dsa','dsa','dssa',1)
 # Update_Admin('01-08-2000','dsa','dsa','dsa','dsa','dssa',1,1)
-Delete_Admin(1)
+# Delete_Admin(1)
 
 
 # Admin - Keywords

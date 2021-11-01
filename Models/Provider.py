@@ -28,11 +28,11 @@ def ExecuteNonQuery(query):
         cur = connection.cursor()
         cur.execute(query)
         connection.commit()
-        msg = " Successfully"
+        msg = "Successfully"
     except Exception as e:
         print(e)
         connection.rollback()
-        msg = "Error in Insert or Update Operation "
+        msg = "Error in Insert or Update Operation"
     finally:
         return msg
         connection.close()
