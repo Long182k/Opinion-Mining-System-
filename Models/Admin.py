@@ -16,13 +16,13 @@ def Delete_Admin(idAdmin):
     msg = Provider.ExecuteNonQuery(query)
     return msg
 
-Insert_Admin('01-08-2000','dsa','dsa','dsa','dsa','dssa',1)
+# Insert_Admin('01-08-2000','dsa','dsa','dsa','dsa','dssa',1)
 # Update_Admin('01-08-2000','dsa','dsa','dsa','dsa','dssa',1,1)
 # Delete_Admin(1)
 
 
 # Admin - Keywords
-def Admin_Insert(category,content,score):
+def Admin_InsertKeyword(category,content,score):
     query = "INSERT INTO Keywords ('category','content',score) VALUES ('{}','{}',{}) ".format(category,content,score)
     msg = Provider.ExecuteNonQuery(query)
     return msg
@@ -32,16 +32,27 @@ def Admin_UpdateKeyword(category,content,score,idKeyword):
     msg = Provider.ExecuteNonQuery(query)
     return msg
 
-def Admin_Delete(idKeyword):
+def Admin_DeleteKeyword(idKeyword):
     query = "DELETE FROM Keywords WHERE idKeyword={}".format(idKeyword)
     msg = Provider.ExecuteNonQuery(query)
     return msg
 
 
+def AdminGetKeyword():
+    query = "SELECT * FROM Keywords"
+
+    try : 
+        record = Provider.ExecuteQuery(query)
+        return record
+
+    except:
+        return None
+
+
 # Test
-# Admin_Insert('Positive','Good',1)
+# Admin_InsertKeyword('Positive','Good',1)
 # Admin_UpdateKeyword('negative','bad',-1,1)
-# Admin_Delete(1)
+# Admin_DeleteKeyword(1)
 
-
+# AdminGetKeyword
 

@@ -29,7 +29,6 @@ def get_post():
     try:
         PostList = []
 
-            # create a instances for filling up employee list
         for i in get_post:
             postDict = {
             'idPost': i[0],
