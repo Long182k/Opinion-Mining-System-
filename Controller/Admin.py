@@ -14,10 +14,11 @@ def ad_create_keyword():
 
     try:
         status = Admin.Admin_InsertKeyword(category,content,score)
-    except:
+    except:  
         status = 'The Admin Insert Keyword successfully'
     return jsonify({'result':status})
-      
+
+
 @app.route('/api/ad_get_keyword', methods = ['GET'])
 def ad_get_keyword():
 
@@ -50,7 +51,7 @@ def ad_update_keyword():
 
     ad_update_keyword =Admin.Admin_UpdateKeyword(json_data['category'],json_data['content'],json_data['score'],json_data['idKeyword'])
 
-    return ad_update_keyword
+    return jsonify({'result':ad_update_keyword})
 
 
 @app.route('/api/ad_delete_keyword/<idKeyword>', methods = ['DELETE'])

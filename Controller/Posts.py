@@ -55,7 +55,8 @@ def update_post():
 
     update_post = Posts.Update_Post(json_data['idPost'],json_data['content'])
 
-    return update_post
+    return jsonify({'result':update_post})
+
 
 
 @app.route('/api/delete_post/<idPost>', methods = ['DELETE'])
