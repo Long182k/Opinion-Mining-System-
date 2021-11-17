@@ -1,9 +1,8 @@
-import Models.Provider as Provider
+import Provider as Provider
 
 from flask_sqlalchemy import SQLAlchemy
 
 
-# Admin - Post
 def Insert_Post(content,dateCreate,idUser):
     query = "INSERT INTO Posts ('content','dateCreate','idUser') VALUES ('{}','{}','{}')".format(content,dateCreate,idUser)
     msg = Provider.ExecuteNonQuery(query)
@@ -33,5 +32,5 @@ def GetPost():
     
 # Test 
 # Insert_Post('Good','2010-10-10')
-# Update_Post(1,'Yeh','01-09-2002')
+Update_Post(1,'Yeh')
 # Delete_Post(1)
