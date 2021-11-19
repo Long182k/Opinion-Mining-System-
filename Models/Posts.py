@@ -1,4 +1,4 @@
-import Provider as Provider
+import Models.Provider as Provider
 
 from flask_sqlalchemy import SQLAlchemy
 

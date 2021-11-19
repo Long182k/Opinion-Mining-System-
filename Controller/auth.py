@@ -31,7 +31,7 @@ def login():
     if request.method == "POST":
         json_data = request.json
         
-        user = Users.User_Login(json_data['userName'], json_data['password'])
+        user = Users.User_Login(json_data['email'], json_data['password'])
         
         if user is True:
             status = True
