@@ -3,7 +3,8 @@ from flask import request, jsonify, json
 from init import app
 
 from Models import Comments
-from nltk.stem import PorterStemmer
+from Models import Keywords
+
 from nltk.tokenize import word_tokenize
 
 @app.route('/api/create_comment', methods=['POST'])
@@ -23,17 +24,18 @@ def create_comment():
     return jsonify({'result':status})
     
 
-    
+
 @app.route('/api/get_comment', methods = ['GET'])
+
 def get_comment():
 
 
-    get_comment = Comments.Get_Comment()
+    comments = Comments.Get_Comment()
 
     try:
         CommentList = []
 
-        for i in get_comment:
+        for i in comments:
             cmtDict = {
             'idComment': i[0],    
             'idPost': i[1],
@@ -64,7 +66,6 @@ def update_comment():
     return jsonify({'result':update_comment})
 
 
-
 @app.route('/api/delete_comment/<idComment>', methods = ['DELETE'])
 def delete_comment(idComment):
 
@@ -73,14 +74,39 @@ def delete_comment(idComment):
     return jsonify({'result':delete_comment})
 
 
+
+def get_keyword():
+
+
+    keywords = Keywords.GetKeyword()
+
+    try:
+        keywordList = []
+
+        for i in keywords:
+            keywordDict = {
+         
+            'score': i[2],
+            'content': i[3]
+            }
+
+            keywordList.append(keywordDict)
         
+            # convert to json data
+            jsonStr = json.dumps(keywordList)
+ 
+    except Exception as e:
+        print(e)
+    return jsonify(jsonStr)
 
-def SentimentAnalysisProcess(content,):
-    ps = PorterStemmer()
-    # PorterStemmer using for look up words have 1 root word
-    # For example : Root Word : Like include Likes Liking Liked Likely
 
-    tweet = word_tokenize(content)
+
+
+def SentimentAnalysisProcess(comments,):
+
+
+
+    tweet = word_tokenize(comments)
     tweet_list = []
     score = 0
 

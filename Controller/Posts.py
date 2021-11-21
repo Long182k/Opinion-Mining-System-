@@ -24,12 +24,12 @@ def create_post():
 def get_post():
 
 
-    get_post = Posts.GetPost()
+    posts = Posts.GetPost()
 
     try:
         PostList = []
 
-        for i in get_post:
+        for i in posts:
             postDict = {
             'idPost': i[0],
             'content': i[1],

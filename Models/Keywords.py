@@ -1,4 +1,4 @@
-import Provider as Provider
+import Models.Provider as Provider
 from flask_sqlalchemy import SQLAlchemy
 import json
 
@@ -18,6 +18,23 @@ def Delete_Keywords(idKeyword):
     query = "DELETE FROM Keywords WHERE idKeyword={}".format(idKeyword)
     msg = Provider.ExecuteNonQuery(query)
     return msg
+
+
+def GetKeyword():
+    query = "SELECT * FROM Keywords"
+
+    try : 
+        record = Provider.ExecuteQuery(query)
+        return record
+
+    except:
+        return None
+
+
+
+
+
+
 
 # def data_entry(content,score):
 #     query = "INSERT INTO Keywords ('content','score') VALUES ('{}',{})",format(content,score)
@@ -40,16 +57,16 @@ def Delete_Keywords(idKeyword):
     
 # Insert Sentiment List to Keyword Table
 
-def Insert_Sentiment_List(content,score):
+# def Insert_Sentiment_List(content,score):
 
-    with open('labels.json') as file:
-        sentiment_dict = json.load(file)
-    # print(sentiment_dict)
+#     with open('labels.json') as file:
+#         sentiment_dict = json.load(file)
+#     # print(sentiment_dict)
 
-    for record in sentiment_dict:
-        query = ('INSERT INTO Keywords (content,score) VALUES (?,?)', (record['content'], record['score'])).format(content,score)
-        msg = Provider.ExecuteNonQuery(query)
-        return msg
+#     for record in sentiment_dict:
+#         query = ('INSERT INTO Keywords (content,score) VALUES (?,?)', (record['content'], record['score'])).format(content,score)
+#         msg = Provider.ExecuteNonQuery(query)
+#         return msg
 
 
 
@@ -57,7 +74,7 @@ def Insert_Sentiment_List(content,score):
 # Insert_Keywords('Positive','Good',1)
 # Update_Keywords('Nev','Goo',-1,1)
 # Delete_Keywords(1)
-Insert_Sentiment_List('zxc',-1)
+# Insert_Sentiment_List('zxc',-1)
 
 #
 # def SentimentAnalysisProcess(self,tweet,positivelist,negativelist):

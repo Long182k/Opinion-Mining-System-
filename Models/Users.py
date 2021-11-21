@@ -34,7 +34,7 @@ def User_Login(userName, password):
 
 
 # Test
-# Insert_Users('01-08-2000','dsa','dsa','dsa','dsa','dssa',1)
+Insert_Users('01-08-2000','dsa','dsa','dsa','dsa','dssa',1,91239219321)
 # Update_User('01-08-2000','dsa','dsa','dsa','dsa','dssa',1,1)
 # Delete_User(1)
 User_Login("dnsa",'sdsa123')
