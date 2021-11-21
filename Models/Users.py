@@ -3,8 +3,8 @@ import Models.Provider as Provider
 from flask_sqlalchemy import SQLAlchemy
 
 # Admin - User
-def Insert_Users(dateOfBirth,address,userName,password,fullName,email,gender,phoneNumber):
-    query = "INSERT INTO Users ('dateOfBirth','address','userName','password','fullName','email',gender,phoneNumber) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}')".format(dateOfBirth,address,userName,password,fullName,email,gender,phoneNumber)
+def Insert_Users(dateOfBirth,address,userName,password,fullName,email,gender):
+    query = "INSERT INTO Users ('dateOfBirth','address','userName','password','fullName','email',gender) VALUES ('{}','{}','{}','{}','{}','{}','{}')".format(dateOfBirth,address,userName,password,fullName,email,gender)
     msg = Provider.ExecuteNonQuery(query)
     return msg
 
@@ -34,7 +34,7 @@ def User_Login(userName, password):
 
 
 # Test
-Insert_Users('01-08-2000','dsa','dsa','dsa','dsa','dssa',1,91239219321)
+Insert_Users('01-08-2000','dsa','dsa','dsa','dsa','dssa',1)
 # Update_User('01-08-2000','dsa','dsa','dsa','dsa','dssa',1,1)
 # Delete_User(1)
 User_Login("dnsa",'sdsa123')

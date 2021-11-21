@@ -295,8 +295,7 @@ def update_image():
     json_data = request.json
 
     update_image = Images.Update_Image(json_data['path'],json_data['idImage'])
-    # update_image = Images.Update_Image(json_data['idImage'],json_data['path'])
-
+    
     return jsonify({'result':update_image})
 
 
