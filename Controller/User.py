@@ -15,7 +15,6 @@ from Models import Users
 @cross_origin()
 def get_user():
 
-
     users = Users.GetAllUser()
 
     try:
@@ -28,9 +27,8 @@ def get_user():
             'address': i[2],
             'userName': i[3],
             'password': i[4],
-            'fullName': i[5],
-            'email': i[6],
-            'gender': i[7]
+            'email': i[5],
+            'gender': i[6]
             }
             UserList.append(userDict)
         

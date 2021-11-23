@@ -16,12 +16,11 @@ def register():
     address=json_data['address']
     userName=json_data['userName']
     password=json_data['password']
-    fullName=json_data['fullName']
     email=json_data['email']
     gender=json_data['gender']
 
     try:
-        status = Users.Insert_Users(dateOfBirth,address,userName,password,fullName,email,gender)
+        status = Users.Insert_Users(dateOfBirth,address,userName,password,email,gender)
     except:
         status = 'User is already registered'
     return jsonify({'result': status})
