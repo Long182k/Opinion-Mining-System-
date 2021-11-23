@@ -39,6 +39,15 @@ def Get_Content():
     except:
         return None
 
+def Get_Comment_By_ID(idComment):
+    query = "SELECT * FROM Comments WHERE idComment={}".format(idComment)
+
+    try : 
+        record = Provider.ExecuteQuery(query)
+        return record
+
+    except:
+        return None
 
 
 # Test 
@@ -52,6 +61,32 @@ Update_Comment('Yesadsadah',10,2)
 
 
 
+
+# @app.route('/api/get_post_byId/<idPost>', methods = ['GET'])
+# @cross_origin(allow_headers=['Content-Type'])
+# def get_post_byId(idPost):
+
+#     posts_byID = Posts.GetPostById(idPost)
+
+#     try:
+#         PostById_List = []
+
+#         for i in posts_byID:
+#             postByIdDict = {
+#              'idPost': i[0],
+#             'content': i[1],
+#             'dateCreate': i[2],
+#             'idUser': i[3],
+#             }
+#             PostById_List.append(postByIdDict)
+        
+#             # convert to json data
+#             jsonStr = json.dumps(PostById_List)
+
+#     except Exception as e:
+#         print(e)
+
+#     return jsonify(jsonStr)
 
 
 

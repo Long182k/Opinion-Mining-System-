@@ -29,7 +29,16 @@ def GetPost():
     except:
         return None
 
-    
+def GetPostById(idPost):
+    query = "SELECT * FROM Posts WHERE idPost={}".format(idPost)
+
+    try : 
+        record = Provider.ExecuteQuery(query)
+        return record
+    except:
+        return None  
+   
+
 # Test 
 # Insert_Post('Good','2010-10-10')
 Update_Post(1,'Yeh')

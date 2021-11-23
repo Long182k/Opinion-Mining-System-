@@ -42,6 +42,18 @@ def GetAllUser():
         return None  
 
 
+def GetUserById(idUser):
+    query = "SELECT * FROM Users WHERE idUser={}".format(idUser)
+
+    try : 
+        record = Provider.ExecuteQuery(query)
+        return record
+
+    except:
+        return None  
+
+
+
 # Test
 # Insert_Users('01-08-2000','dsa','dsa','dsa','dsa','dssa',1)
 # Update_User('01-08-2000','dsa','dsa','dsa','dsa','dssa',1,1)

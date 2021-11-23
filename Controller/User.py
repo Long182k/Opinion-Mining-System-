@@ -40,6 +40,39 @@ def get_user():
 
     return jsonify(jsonStr)
 
+
+@app.route('/api/get_user_byId/<idUser>', methods = ['GET'])
+@cross_origin(allow_headers=['Content-Type'])
+def get_user_byId(idUser):
+
+    users_by_id = Users.GetUserById(idUser)
+
+    try:
+        UserByIdList = []
+
+        for i in users_by_id:
+            userByIdDict = {
+            'idUser': i[0],
+            'dateOfBirth': i[1],
+            'address': i[2],
+            'userName': i[3],
+            'password': i[4],
+            'email': i[5],
+            'gender': i[6]
+            }
+            UserByIdList.append(userByIdDict)
+        
+            # convert to json data
+            jsonStr = json.dumps(UserByIdList)
+
+    except Exception as e:
+        print(e)
+
+    return jsonify(jsonStr)
+
+
+
+
 def TinhDiemCmt(content,dateCreate,ranked,idUser,idPost):
 
     score = 0 
@@ -197,6 +230,34 @@ def get_comment():
     return jsonify(jsonStr)
 
 
+@app.route('/api/get_comment_by_ID/<idComment>', methods = ['GET'])
+@cross_origin(allow_headers=['Content-Type'])
+def get_comment_by_ID(idComment):
+
+    commentsByID = Comments.Get_Comment_By_ID(idComment)
+
+    try:
+        CommentByIDList = []
+
+        for i in commentsByID:
+            cmtByIDDict = {
+            'idComment': i[0],    
+            'idPost': i[1],
+            'idUser': i[2],
+            'content': i[3],
+            'dateCreate': i[4],
+            'ranked': i[5]
+            }
+            CommentByIDList.append(cmtByIDDict)
+        
+            # convert to json data
+            jsonStr = json.dumps(CommentByIDList)
+ 
+    except Exception as e:
+        print(e)
+
+    return jsonify(jsonStr)
+
 
 @app.route('/api/update_comment', methods = ['PUT'])
 @cross_origin(allow_headers=['Content-Type'])
@@ -261,6 +322,32 @@ def get_post():
 
     return jsonify(jsonStr)
 
+
+@app.route('/api/get_post_byId/<idPost>', methods = ['GET'])
+@cross_origin(allow_headers=['Content-Type'])
+def get_post_byId(idPost):
+
+    posts_byID = Posts.GetPostById(idPost)
+
+    try:
+        PostById_List = []
+
+        for i in posts_byID:
+            postByIdDict = {
+             'idPost': i[0],
+            'content': i[1],
+            'dateCreate': i[2],
+            'idUser': i[3],
+            }
+            PostById_List.append(postByIdDict)
+        
+            # convert to json data
+            jsonStr = json.dumps(PostById_List)
+
+    except Exception as e:
+        print(e)
+
+    return jsonify(jsonStr)
 
 
 @app.route('/api/update_post', methods = ['PUT'])
