@@ -8,7 +8,7 @@ from Models import Users
 
 
 @app.route('/api/register', methods=['POST'])
-@cross_origin()
+@cross_origin(allow_headers=['Content-Type'])
 def register():
     json_data = request.json
     
@@ -27,7 +27,7 @@ def register():
 
 
 @app.route('/api/login', methods=['POST'])
-@cross_origin()
+@cross_origin(allow_headers=['Content-Type'])
 def login():
     if request.method == "POST":
         json_data = request.json
@@ -43,7 +43,7 @@ def login():
 
 
 @app.route('/api/logout')
-@cross_origin()
+@cross_origin(allow_headers=['Content-Type'])
 def logout():
     return jsonify({'result': 'Logout Successfully !!!'})
 

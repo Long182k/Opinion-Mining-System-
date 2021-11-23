@@ -9,7 +9,7 @@ from Models import Comments
 from Models import Keywords
 
 @app.route('/api/ad_create_keyword', methods=['POST'])
-@cross_origin()
+@cross_origin(allow_headers=['Content-Type'])
 def ad_create_keyword():
     json_data = request.json
 
@@ -25,7 +25,7 @@ def ad_create_keyword():
 
 
 @app.route('/api/ad_get_keyword', methods = ['GET'])
-@cross_origin()
+@cross_origin(allow_headers=['Content-Type'])
 def ad_get_keyword():
 
     ad_get_keyword = Admin.AdminGetKeyword()
@@ -87,7 +87,7 @@ def TinhLaiToanBoKeyword():
         print(status + '\n')
 
 @app.route('/api/ad_update_keyword', methods = ['PUT'])
-@cross_origin()
+@cross_origin(allow_headers=['Content-Type'])
 def ad_update_keyword():
     
     json_data = request.json
@@ -98,7 +98,7 @@ def ad_update_keyword():
 
 
 @app.route('/api/ad_delete_keyword/<idKeyword>', methods = ['DELETE'])
-@cross_origin()
+@cross_origin(allow_headers=['Content-Type'])
 def ad_delete_keyword(idKeyword):
 
     ad_delete_keyword = Admin.Admin_DeleteKeyword(idKeyword)
