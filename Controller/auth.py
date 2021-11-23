@@ -1,4 +1,5 @@
 from flask import request, jsonify
+from flask_cors import cross_origin
 
 from init import app
 
@@ -7,6 +8,7 @@ from Models import Users
 
 
 @app.route('/api/register', methods=['POST'])
+@cross_origin()
 def register():
     json_data = request.json
     
@@ -26,6 +28,7 @@ def register():
 
 
 @app.route('/api/login', methods=['POST'])
+@cross_origin()
 def login():
     if request.method == "POST":
         json_data = request.json
@@ -41,6 +44,7 @@ def login():
 
 
 @app.route('/api/logout')
+@cross_origin()
 def logout():
     return jsonify({'result': 'Logout Successfully !!!'})
 

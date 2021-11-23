@@ -1,5 +1,6 @@
 from flask import request, jsonify, json
 from nltk.tokenize import word_tokenize
+from flask_cors import cross_origin
 
 from init import app
 
@@ -53,6 +54,7 @@ def TinhDiemCmt(content,dateCreate,ranked,idUser,idPost):
 '''
 
 @app.route('/api/user_create_cmt', methods=['POST'])
+@cross_origin()
 def user_create_cmt():
     json_data = request.json
 
@@ -136,7 +138,7 @@ def user_create_cmt():
 
 
 @app.route('/api/get_comment', methods = ['GET'])
-
+@cross_origin()
 def get_comment():
 
 
@@ -167,6 +169,7 @@ def get_comment():
 
 
 @app.route('/api/update_comment', methods = ['PUT'])
+@cross_origin()
 def update_comment():
     
     json_data = request.json
@@ -177,6 +180,7 @@ def update_comment():
 
 
 @app.route('/api/delete_comment/<idComment>', methods = ['DELETE'])
+@cross_origin()
 def delete_comment(idComment):
 
     delete_comment = Comments.Delete_Comment(idComment)
@@ -184,6 +188,7 @@ def delete_comment(idComment):
     return jsonify({'result':delete_comment})
 
 @app.route('/api/create_post', methods=['POST'])
+@cross_origin()
 def create_post():
     json_data = request.json
 
@@ -200,6 +205,7 @@ def create_post():
 
     
 @app.route('/api/get_post', methods = ['GET'])
+@cross_origin()
 def get_post():
 
 
@@ -228,6 +234,7 @@ def get_post():
 
 
 @app.route('/api/update_post', methods = ['PUT'])
+@cross_origin()
 def update_post():
     
     json_data = request.json
@@ -239,6 +246,7 @@ def update_post():
 
 
 @app.route('/api/delete_post/<idPost>', methods = ['DELETE'])
+@cross_origin()
 def delete_post(idPost):
 
     delete_post = Posts.Delete_Post(idPost)
@@ -248,6 +256,7 @@ def delete_post(idPost):
     
         
 @app.route('/api/create_image', methods=['POST'])
+@cross_origin()
 def create_image():
     json_data = request.json
 
@@ -263,6 +272,7 @@ def create_image():
 
     
 @app.route('/api/get_image', methods = ['GET'])
+@cross_origin()
 def get_image():
 
 
@@ -290,6 +300,7 @@ def get_image():
 
 
 @app.route('/api/update_image', methods = ['PUT'])
+@cross_origin()
 def update_image():
     
     json_data = request.json
@@ -302,6 +313,7 @@ def update_image():
 
 
 @app.route('/api/delete_image/<idImage>', methods = ['DELETE'])
+@cross_origin()
 def delete_image(idImage):
 
     delete_image = Images.Delete_Image(idImage)
