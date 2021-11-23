@@ -30,7 +30,16 @@ def User_Login(userName, password):
         return False
     except:
         return False
-    
+
+def GetAllUser():
+    query = "SELECT * FROM Users"
+
+    try : 
+        record = Provider.ExecuteQuery(query)
+        return record
+
+    except:
+        return None  
 
 
 # Test

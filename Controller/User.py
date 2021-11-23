@@ -8,7 +8,39 @@ from Models import Comments
 from Models import Keywords
 from Models import Posts
 from Models import Images
+from Models import Users
 
+  
+@app.route('/api/get_user', methods = ['GET'])
+@cross_origin()
+def get_user():
+
+
+    users = Users.GetAllUser()
+
+    try:
+        UserList = []
+
+        for i in users:
+            userDict = {
+            'idUser': i[0],
+            'dateOfBirth': i[1],
+            'address': i[2],
+            'userName': i[3],
+            'password': i[4],
+            'fullName': i[5],
+            'email': i[6],
+            'gender': i[7]
+            }
+            UserList.append(userDict)
+        
+            # convert to json data
+            jsonStr = json.dumps(UserList)
+
+    except Exception as e:
+        print(e)
+
+    return jsonify(jsonStr)
 
 def TinhDiemCmt(content,dateCreate,ranked,idUser,idPost):
 
