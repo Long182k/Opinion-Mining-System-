@@ -1,10 +1,10 @@
 from init import app
 from Controller.auth import *
-# from Controller.Posts import *
 from Controller.Admin import *
-# from Controller.Comments import *
 from Controller.User import *
-
+# from Controller.User import create_app
+# app = create_app()
+# app.app_context().push()
 #app.run(host='localhost', port=5000,debug = True, threaded = True, use_reloader = False)
 
 

@@ -10,7 +10,7 @@ from Models import Posts
 from Models import Images
 from Models import Users
 
-  
+
 @app.route('/api/get_user', methods = ['GET'])
 @cross_origin(allow_headers=['Content-Type'])
 def get_user():
@@ -72,7 +72,6 @@ def get_user_byId(idUser):
 
 
 
-
 def TinhDiemCmt(content,dateCreate,ranked,idUser,idPost):
 
     score = 0 
@@ -115,10 +114,84 @@ def TinhDiemCmt(content,dateCreate,ranked,idUser,idPost):
             sau khi create trong db nó 2 cmt của bài post đó nhưng client vẫn 1
             lúc này mình gọi lại 1 hàm get thì nó mới lấy được cả 2 cmt rồi trả lên show lại
 '''
+TinhDiemCmt('she is beautiful','1-2-3','bad',1,1)
+
+
 
 @app.route('/api/user_create_cmt', methods=['POST'])
 @cross_origin(allow_headers=['Content-Type'])
+# with app.app_context():
+# @app.cli.command()
 def user_create_cmt():
+    json_data = request.json
+
+            
+    content = json_data['content']
+    dateCreate = json_data['dateCreate']
+    ranked = json_data['ranked']
+    idUser = json_data['idUser']
+    idPost = json_data['idPost']
+            
+    try:
+        status = TinhDiemCmt(content,dateCreate,ranked,idUser,idPost)
+    except Exception as e:  
+        print(e)
+        status = 'The Comment has already execute.'
+    return jsonify({'result':status})
+# with app.app_context():
+# user_create_cmt('she is beautiful','01-09-2001','Bad',1,1)
+
+
+def TinhDiemCmt(content,dateCreate,ranked,idUser,idPost):
+
+    score = 0 
+ 
+    '''
+        LISTKEYWORD:
+            0 - idKeyword
+            1 - category
+            2 - score
+            3 - content
+    '''
+    
+    ListKeyword = Keywords.GetKeyword()
+    
+    '''
+        ALLCMT:
+            0 - idComment
+            1 - idPost
+            2 - idUser
+            3 - content
+            4 - dateCreate
+            5 - ranked
+    '''
+    AllCmt = Comments.Get_Comment()
+    
+
+    for cmt in AllCmt:
+        Listword = word_tokenize(cmt[3])
+        for word in Listword:
+            for keyword in ListKeyword:
+                if word == keyword[3]:
+                    score = score + keyword[2]
+                    break
+        
+        ranked = 'GOOD' if score > 0 else 'BAD'
+        status = Comments.Insert_Comment(cmt[1],cmt[2],cmt[3],cmt[4],ranked)
+        # status = Comments.Insert_Comment(content,dateCreate,ranked,idUser,idPost)
+
+        return status
+TinhDiemCmt('she is beautiful','1-2-3','bad',1,1)
+
+'''
+    User 1: cmt vô post đó là ABC
+    User 2: cmt vô tiếp thì gọi create trước [lúc này trên client vẫn chỉ có cmt của User 1]
+            sau khi create trong db nó 2 cmt của bài post đó nhưng client vẫn 1
+            lúc này mình gọi lại 1 hàm get thì nó mới lấy được cả 2 cmt rồi trả lên show lại
+'''
+
+@app.route('/api/user_create_cmt', methods=['POST'])
+def user_create_cmt(content,dateCreate,ranked,idUser,idPost):
     json_data = request.json
 
     
@@ -129,105 +202,42 @@ def user_create_cmt():
     idPost = json_data['idPost']
     
     try:
-        status = TinhDiemCmt(content)
+        status = Comments.Insert_Comment(content,dateCreate,ranked,idUser,idPost)
+        TinhDiemCmt(content,ranked)
     except:  
         status = 'The Comment has already execute.'
     return jsonify({'result':status})
+user_create_cmt('she is beautiful','01-09-2001','Bad',1,1)
 
-# # def TinhDiemCmt(content,dateCreate,ranked,idUser,idPost):
-# def TinhDiemCmt():
 
-#     score = 0 
- 
-#     '''
-#         LISTKEYWORD:
-#             0 - idKeyword
-#             1 - category
-#             2 - score
-#             3 - content
-#     '''
-    
-#     ListKeyword = Keywords.GetKeyword()
-    
-#     '''
-#         ALLCMT:
-#             0 - idComment
-#             1 - idPost
-#             2 - idUser
-#             3 - content
-#             4 - dateCreate
-#             5 - ranked
-#     '''
-#     AllCmt = Comments.Get_Comment()
-    
+# @app.route('/api/get_comment', methods = ['GET'])
+# @cross_origin(allow_headers=['Content-Type'])
+# def get_comment():
 
-#     for cmt in AllCmt:
-#         Listword = word_tokenize(cmt[3])
-#         for word in Listword:
-#             for keyword in ListKeyword:
-#                 if word == keyword[3]:
-#                     score = score + keyword[2]
-#                     break
-        
-#         ranked = 'GOOD' if score > 0 else 'BAD'
-#         status = Comments.Insert_Comment(cmt[1],cmt[2],cmt[3],cmt[4],ranked)
-#         # status = Comments.Insert_Comment(content,dateCreate,ranked,idUser,idPost)
 
-#         return status
-# '''
-#     User 1: cmt vô post đó là ABC
-#     User 2: cmt vô tiếp thì gọi create trước [lúc này trên client vẫn chỉ có cmt của User 1]
-#             sau khi create trong db nó 2 cmt của bài post đó nhưng client vẫn 1
-#             lúc này mình gọi lại 1 hàm get thì nó mới lấy được cả 2 cmt rồi trả lên show lại
-# '''
+#     comments = Comments.Get_Comment()
 
-# @app.route('/api/user_create_cmt', methods=['POST'])
-# def user_create_cmt():
-#     json_data = request.json
-
-    
-#     content = json_data['content']
-#     dateCreate = json_data['dateCreate']
-#     ranked = json_data['ranked']
-#     idUser = json_data['idUser']
-#     idPost = json_data['idPost']
-    
 #     try:
-#         status = Comments.Insert_Comment(content,dateCreate,ranked,idUser,idPost)
-#         TinhDiemCmt(content,ranked)
-#     except:  
-#         status = 'The Comment has already execute.'
-#     return jsonify({'result':status})
+#         CommentList = []
 
-
-@app.route('/api/get_comment', methods = ['GET'])
-@cross_origin(allow_headers=['Content-Type'])
-def get_comment():
-
-
-    comments = Comments.Get_Comment()
-
-    try:
-        CommentList = []
-
-        for i in comments:
-            cmtDict = {
-            'idComment': i[0],    
-            'idPost': i[1],
-            'idUser': i[2],
-            'content': i[3],
-            'dateCreate': i[4],
-            'ranked': i[5]
-            }
-            CommentList.append(cmtDict)
+#         for i in comments:
+#             cmtDict = {
+#             'idComment': i[0],    
+#             'idPost': i[1],
+#             'idUser': i[2],
+#             'content': i[3],
+#             'dateCreate': i[4],
+#             'ranked': i[5]
+#             }
+#             CommentList.append(cmtDict)
         
-            # convert to json data
-            jsonStr = json.dumps(CommentList)
+#             # convert to json data
+#             jsonStr = json.dumps(CommentList)
  
-    except Exception as e:
-        print(e)
+#     except Exception as e:
+#         print(e)
 
-    return jsonify(jsonStr)
+#     return jsonify(jsonStr)
 
 
 @app.route('/api/get_comment_by_ID/<idComment>', methods = ['GET'])

@@ -3,9 +3,19 @@ from flask_cors import CORS
 from flask_restful import Api
 
 app = Flask(__name__)
+
+def create_app():
+    app = Flask(__name__)
+
+    with app.app_context():
+        init_db()
+
+    return app
+
+
 cors = CORS(app)
 api = Api(app)
-
+# app.app_context()
 # CORS(app, origins="http://localhost:5500", allow_headers=[
 #     "Content-Type", "Authorization", "Access-Control-Allow-Credentials"],
 #     supports_credentials=True)
