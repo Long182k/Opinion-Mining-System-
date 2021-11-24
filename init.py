@@ -4,15 +4,6 @@ from flask_restful import Api
 
 app = Flask(__name__)
 
-def create_app():
-    app = Flask(__name__)
-
-    with app.app_context():
-        init_db()
-
-    return app
-
-
 cors = CORS(app)
 api = Api(app)
 # app.app_context()
