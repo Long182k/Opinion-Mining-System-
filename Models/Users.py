@@ -8,6 +8,13 @@ def Insert_Users(dateOfBirth,address,userName,password,email,gender):
     msg = Provider.ExecuteNonQuery(query)
     return msg
 
+def Insert_Users(dateOfBirth,address,userName,password,email,gender):
+    query = "INSERT INTO Users ('dateOfBirth','address','userName','password','email',gender) VALUES ('{}','{}','{}','{}','{}','{}')".format(dateOfBirth,address,userName,password,email,gender)
+    msg = Provider.ExecuteNonQuery(query)
+    return msg
+
+
+
 def Update_User(idUser,dateOfBirth,address,userName,password,email,gender,phoneNumber):
     query = "UPDATE Users SET dateOfBirth='{}', address='{}', userName='{}', password='{}',email='{}',gender={},phoneNumber={} WHERE idUser={}".format(idUser,dateOfBirth,address,userName,password,email,gender,phoneNumber)
     msg = Provider.ExecuteNonQuery(query)

@@ -1,5 +1,7 @@
 from flask import request, jsonify
 from flask_cors import cross_origin
+# from flask_bcrypt import bcrypt
+import bcrypt
 
 from init import app
 
@@ -49,6 +51,47 @@ def logout():
 
 
 
+
+# @app.route('/api/register', methods=['POST'])
+# @cross_origin(allow_headers=['Content-Type'])
+# def register():
+#     json_data = request.json
+    
+#     dateOfBirth =json_data['dateOfBirth']
+#     address=json_data['address']
+#     userName=json_data['userName']
+#     password=json_data['password']
+#     email=json_data['email']
+#     gender=json_data['gender']
+#     # hashedpw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+#     password = bcrypt.hashpw(password, bcrypt.gensalt())
+#         if isinstance(password, str):
+#             return password
+#         else:
+#             return password.decode("UTF-8") 
+
+#     try:
+#         status = Users.Insert_Users(dateOfBirth,address,userName,email,gender,password)
+#     except Exception as e:
+#         print(e)
+#         status = 'User is already registered'
+#     return jsonify({'result': status})
+
+
+# @app.route('/api/login', methods=['POST'])
+# @cross_origin(allow_headers=['Content-Type'])
+# def login():
+#     if request.method == "POST":
+#         json_data = request.json
+        
+#         user = Users.User_Login(json_data['email'], json_data['password'])
+        
+#         if user is True:
+#             status = True
+#         else:
+#             status = False
+
+#         return jsonify({'result': 'Login Successfully !!!'})
 
 
 

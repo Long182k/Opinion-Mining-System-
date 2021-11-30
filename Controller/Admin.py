@@ -1,6 +1,7 @@
 from flask import request, jsonify, json
 from flask_cors import cross_origin
 from nltk.tokenize import word_tokenize
+from ratelimit import limits
 
 from init import app
 
@@ -25,10 +26,11 @@ def ad_create_keyword():
 
 
 @app.route('/api/ad_get_keyword', methods = ['GET'])
+# @limits(calls=1, period=1) #max 1 call per second
 @cross_origin(allow_headers=['Content-Type'])
 def ad_get_keyword():
 
-    ad_get_keyword = Admin.AdminGetKeyword()
+    ad_get_keyword = Admin.AdminGetKeyword()[:20] 
 
     try:
         KeywordList = []
