@@ -25,12 +25,40 @@ def ad_create_keyword():
     return jsonify({'result':status})
 
 
-@app.route('/api/ad_get_keyword', methods = ['GET'])
+@app.route('/api/ad_get_keyword_20', methods = ['GET'])
 # @limits(calls=1, period=1) #max 1 call per second
+@cross_origin(allow_headers=['Content-Type'])
+def ad_get_keyword_20():
+
+    ad_get_keyword_20 = Admin.AdminGetKeyword()[:20] 
+
+    try:
+        KeywordList_20 = []
+
+        for i in ad_get_keyword_20:
+            KeywordDict_20 = {
+            'idKeyword': i[0],
+            'category': i[1],
+            'score': i[2],
+            'content': i[3],
+            }
+            KeywordList_20.append(KeywordDict_20)
+        
+            # convert to json data
+            jsonStr = json.dumps(KeywordList_20)
+
+    except Exception as e:
+        print(e)
+
+    return jsonify(jsonStr)
+
+
+@app.route('/api/ad_get_keyword', methods = ['GET'])
+# @limits(calls=1000, period=1) #max 1 call per second
 @cross_origin(allow_headers=['Content-Type'])
 def ad_get_keyword():
 
-    ad_get_keyword = Admin.AdminGetKeyword()[:20] 
+    ad_get_keyword = Admin.AdminGetKeyword()
 
     try:
         KeywordList = []

@@ -13,7 +13,7 @@ from Models import Users
 @cross_origin(allow_headers=['Content-Type'])
 def register():
     json_data = request.json
-    
+
     dateOfBirth =json_data['dateOfBirth']
     address=json_data['address']
     userName=json_data['userName']
