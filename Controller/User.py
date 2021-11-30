@@ -72,7 +72,7 @@ def get_user_byId(idUser):
     return jsonify(jsonStr)
 
 
-def TinhDiemCmt(content,dateCreate,ranked,idUser,idPost):
+def ComputeCmtScore(content,dateCreate,ranked,idUser,idPost):
 
     score = 0 
  
@@ -131,7 +131,7 @@ def user_create_cmt():
     idPost = json_data['idPost']
             
     try:
-        status = TinhDiemCmt(content,dateCreate,ranked,idUser,idPost)
+        status = ComputeCmtScore(content,dateCreate,ranked,idUser,idPost)
     except Exception as e:  
         print(e)
         status = 'The Comment has already execute.'

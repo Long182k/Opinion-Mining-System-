@@ -52,7 +52,7 @@ def ad_get_keyword():
 
     return jsonify(jsonStr)
 
-def TinhLaiToanBoKeyword():
+def ComputeAllKeyword():
     score = 0 
 
     '''
@@ -95,7 +95,7 @@ def ad_update_keyword():
     json_data = request.json
 
     ad_update_keyword = Admin.Admin_UpdateKeyword(json_data['category'],json_data['content'],json_data['score'],json_data['idKeyword'])
-    TinhLaiToanBoKeyword()
+    ComputeAllKeyword()
     return jsonify({'result':ad_update_keyword})
 
 
