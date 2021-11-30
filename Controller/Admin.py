@@ -1,7 +1,7 @@
 from flask import request, jsonify, json
 from flask_cors import cross_origin
 from nltk.tokenize import word_tokenize
-from ratelimit import limits
+# from ratelimit import limits
 
 from init import app
 
