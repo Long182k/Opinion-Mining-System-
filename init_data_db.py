@@ -4,7 +4,7 @@ import sqlite3 as sql
 # This using for insert update
 def ExecuteNonQuery(query):
     try:
-        connection = sql.connect("./sent_al.db")
+        connection = sql.connect("./project.db")
 
         cur = connection.cursor()
         cur.execute(query)

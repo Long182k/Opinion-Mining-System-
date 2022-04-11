@@ -5,7 +5,7 @@ import sqlite3 as sql
 def ExecuteQuery(query):
     try:
         #open connection
-        connection = sql.connect('sent_al.db')
+        connection = sql.connect('project.db')
 
         # create a cursor object to execute all queries
         cur = connection.cursor()
@@ -23,7 +23,7 @@ def ExecuteQuery(query):
 # This using for insert update
 def ExecuteNonQuery(query):
     try:
-        connection = sql.connect("sent_al.db")
+        connection = sql.connect("project.db")
 
         cur = connection.cursor()
         cur.execute(query)
